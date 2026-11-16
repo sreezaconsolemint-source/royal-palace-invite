@@ -20,7 +20,7 @@ window.JFY_DATA = {
   rsvp_deadline: "2027-01-31",
   family_signoff: "With love, The Malhotra & Kapoor Families",
   music_url: "assets/music.mp3",
-  music_credit: "\u201CThere is Romance\u201D \u2014 Kevin MacLeod (incompetech.com), licensed under CC BY 4.0",
+  music_credit: "",
   hero_image: "assets/img/hero_palace.webp",
   cover_image: "assets/img/couple_call.webp",
   groom_photo: "assets/img/groom.webp",
