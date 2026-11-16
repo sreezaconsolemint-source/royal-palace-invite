@@ -80,14 +80,14 @@
 
   function buildCalendar() {
     var p = pd(D.event_date); if (!p) { $('#std').classList.add('is-empty'); return; }
-    $('#calMonth').textContent = MON[p.mo].toUpperCase() + ' ' + p.y;
+    $('#calMonth').innerHTML = '<span class="cal__acc">' + p.d + '</span> ' + MON[p.mo].toUpperCase() + ' ' + p.y;
     $('#calDay').textContent = p.d;
     var g = $('#calGrid'), html = '';
     'SMTWTFS'.split('').forEach(function (c) { html += '<span class="wd">' + c + '</span>'; });
     var first = new Date(Date.UTC(p.y, p.mo, 1)).getUTCDay(), days = new Date(Date.UTC(p.y, p.mo + 1, 0)).getUTCDate();
     var evDays = {}; events.forEach(function (e) { var q = pd(e.date); if (q && q.y === p.y && q.mo === p.mo) evDays[q.d] = 1; });
     for (var i = 0; i < first; i++) html += '<span></span>';
-    for (var d = 1; d <= days; d++) html += '<span class="d' + (d === p.d ? ' main' : evDays[d] ? ' ev' : '') + '">' + d + '</span>';
+    for (var d = 1; d <= days; d++) html += '<span class="d' + (d === p.d ? ' main' : evDays[d] ? ' ev' : '') + '"><b>' + d + '</b></span>';
     g.innerHTML = html;
   }
 
@@ -164,6 +164,8 @@
   /* ---------- envelope ---------- */
   function openEnvelope() {
     var std = $('#std'); if (std.classList.contains('is-open')) return;
+    var env = $('#env'), cal = $('#envCard .cal'), ch = Math.ceil(cal.scrollHeight) + 2, eh = env.offsetHeight;
+    env.style.setProperty('--cardH', ch + 'px'); env.style.setProperty('--cardTop', Math.round((eh - ch) / 2) + 'px'); std.style.setProperty('--stageH', (ch + 24) + 'px');
     std.classList.add('is-open'); $('#envHint').textContent = 'Mark your calendar ❤';
     var r = $('#env').getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 26);
   }
